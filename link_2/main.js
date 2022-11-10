@@ -1,11 +1,11 @@
 
 // 0. ひも付きチェック
-  // alert(1111);
+// alert(1111);
 
 
 // 1.商品情報の出し分けのための配列を定義
 
-  // var object = {"image":"null","title":"null","detail":"null"}; の構造になっています。
+// var object = {"image":"null","title":"null","detail":"null"}; の構造になっています。
 
 var object_itemlist= [
  {"image":'img/st_1.jpeg',"title":"上品見え2wayキャミワンピース","detail":"胸元のVカットと上品見えする細ストライプ柄がストレートタイプにぴったりの1着。華奢なストラップや深めのスリットなど、ドキッとする女性らしさも演出。ストレッチ性がありながらも薄すぎない生地感だから、レイヤードしてももたつかず◎。"},
@@ -40,20 +40,18 @@ var object_itemlist= [
  {"image":'img/nt_10.jpeg',"title":"デシンマキシティアードワンピ","detail":"ラフなアイテムの多いナチュラルタイプですが、細かすぎなければフリル使いもOK。マキシ丈のティアードやマーメイドワンピースは甘くなりすぎず、絶妙なバランスになりおすすめです。表情豊かなフリンジジャカードドレスなら、まわりと差がつくワンピスタイルに。"}
 ];
 
-  //出力チェック
-  // console.log(object_itemlist[10].title);
+//出力チェック
+// console.log(object_itemlist[10].title);
 
 
 
-// 2.以下にて乱数を生成・商品情報の配列リストを指定して情報をひっぱってくる処理--------
-
+// 2.以下にて乱数を生成・商品情報の配列リストを指定して情報をひっぱってくる処理
 
 
 // 2-B.変数リストは１つで中の数字を骨格別に分ける方法（後の処理が楽）
 
 // documentが読み込まれた時点から処理がスタートする合図
 // fav処理のため即時関数を廃止（追記）
-
 
 
 //2-B-1. 場合分けのためにまずパラメーターを取ってくる（判定する）準備
@@ -140,14 +138,13 @@ $("#li_item_detail_3").text(object_itemlist[num3].detail)
 
 
 
-//ここから保存（localStorage関連）を追記
 
 
-// let count = null;
-// let Array = [1,2,3]
+//＝＝＝＝＝＝ここから保存（localStorage関連）を追記＝＝＝＝＝＝＝
 
 
-// //①favマークを押したときにどのアイテムが押されたか判別
+
+// favマークを押したときにどのアイテムが押されたか判別【不要】
 
 
 // $("#fav_1").on("click",function(){
@@ -160,49 +157,71 @@ $("#li_item_detail_3").text(object_itemlist[num3].detail)
 //   count = 2;
 // });
 
-
-
-
-$("#fav_1").on("click",function(){
-  console.log("商品番号" + num1);
-});
-
-$("#fav_2").on("click",function(){
-  console.log("商品番号" + num2);
-});
-
-$("#fav_3").on("click",function(){
-  console.log("商品番号" + num3);
-});
-
-
-// //②押されたアイテムのお気に入りフラグをONにする準備
-
-// let flag_1 = "OFF"; //変数flagにONかOFFかを持たせる（初期設定は全部OFF）
-// let flagnum_1 = 0; //フラグに何回押されたかを数えさせる
-
-// //③フラグをクリックするたびに加算する
-
 // $("#fav_1").on("click",function(){
-//   flagnum_1++ ; //ボタンを押すたびにフラグに加算
+//   console.log("商品番号" + num1);
+// });
 
-//   if(flagnum_1 % 2 !== 0 ){ //フラグが奇数ならお気に入りON
-//     flag_1 = "ON";
-//   } else if ( flagnum_1 % 2 == 0) {//フラグが偶数ならお気に入りOFF
-//     flag_1 = "OFF";
-//   }
+// $("#fav_2").on("click",function(){
+//   console.log("商品番号" + num2);
+// });
 
-//   console.log(flag_1);//フラグのON/OFF状態を出力
-//   console.log(flagnum_1);//フラグのON/OFF状態を出力
-
-//   //④グラフの状態をローカルストレージに保存する
-//   localStorage.setItem("商品番号" + num1,flag_1);
-
+// $("#fav_3").on("click",function(){
+//   console.log("商品番号" + num3);
 // });
 
 
 
 
+//①最初にページを読み込んだ状態でローカルストレージにあるものを表示
+
+for( let iii = 0; iii < localStorage.length; iii++ ){
+  let key = localStorage.key(iii);
+  let value = localStorage.getItem(key);
+
+
+
+  let html = `
+  <tr>
+    <td>${key}</td> 
+    <td>${value}</td>
+    <td>画像</td> 
+    <td>商品名</td>
+  </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
+
+  if ( value === "ON" ){ //もしvalueがONなら
+  $("#list").append(html); //リストの内容を表示（繰り返し処理でONの数だけアペンドしつづける）
+  }
+};
+
+
+
+//画像を表示しようとしたバージョン（未完）
+
+
+// for( let iii = 0; iii < localStorage.length; iii++ ){
+//   let key = localStorage.key(iii);
+//   let value = localStorage.getItem(key);
+
+//   let item = list[iii]
+
+//   if ( value === "ON" ){ //もしvalueがONなら取ってきて表示
+
+//   let html = `
+//   <dd>
+//     <img src="${object_itemlist[item].image}" alt="">
+//   </dd>
+//   <dt> ${object_itemlist[item].title} </dt>
+//   `; //値を埋め込んでいる（テンプレートリテラル）
+
+//   $("#fav_list").append(html); //リストの内容を表示
+//   }
+
+//   //ストレージにあるKeyの数だけこここまで繰り返し
+
+//   $(".fav_test").on("click",function(){
+//     $("fav_list").reload;
+//   });
+// };
 
 
 
@@ -224,7 +243,7 @@ $("#fav_1").on("click",function(){
   }
 
   console.log(flag_1);//フラグのON/OFF状態を出力
-  console.log(flagnum_1);//フラグのON/OFF状態を出力
+  // console.log(flagnum_1);//フラグの押された回数を出力
 
   //④グラフの状態をローカルストレージに保存する
   localStorage.setItem("商品番号" + num1,flag_1);
@@ -283,83 +302,65 @@ $("#fav_3").on("click",function(){
 
 
 
+// //②新たにクリックで登録・除外された場合の処理
 
-$(".fav_test").on("click",function(){
+// $(".fav_test").on("click",function(){
 
-  for( let iii = 0; iii < localStorage.length; iii++ ){
-    let key = localStorage.key(iii);
-    let value = localStorage.getItem(key);
+//   for( let iii = 0; iii < localStorage.length; iii++ ){
+//     let key = localStorage.key(iii);
+//     let value = localStorage.getItem(key);
 
-    // localStorage.getItem(key)
-
-    console.log(key,value); //ONまたはOFFの全件取得
-
-    if ( value = "ON" ){ 
-
-    const html = `
-    <tr>
-      <th>${key}</th> 
-      <td>${value}</td>
-    </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
-
-    $("#list").html(html);
-    $("#list").append(html);
-
-    }
-    
-
-  };
-  
-
-
-  // let boxes = document.getElementsByClassName('box').length;
-
-  // function save() {	
-  //   for(let i = 1; i <= boxes; i++){
-  //     var checkbox = document.getElementById(String(i));
-  //     localStorage.setItem("checkbox" + String(i), checkbox.checked);	
-  //   }
-  // }
-  
-  // //for loading
-  // for(let i = 1; i <= boxes; i++){
-  //   if(localStorage.length > 0){
-  //     var checked = JSON.parse(localStorage.getItem("checkbox" + String(i)));
-  //     document.getElementById(String(i)).checked = checked;
-  //   }
-  // }
-  // window.addEventListener('change', save);
-
-
-
-
-
-
-
-
-
-
-});
-
-// if ( value = "ON" ){ //もしONならその商品だけHTMLに表示
-
-//   const html = `
+//     let html = `
 //     <tr>
 //       <th>${key}</th> 
 //       <td>${value}</td>
 //     </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
 
-//   $("#list").html(html);
+//     if ( value === "ON" ){ //もしvalueをONに変更したなら取ってきて追加表示
+//       $("#list").append(html); //リストの内容を表示
 
-//   }
+//     } else if ( value === "OFF" ){ //もしvalueをOFFに変更したなら削除
+//       $("#list").remove(html);
+//       // $("#list").append(html); //残ったリストの内容（ONのみ）を再表示      
+//     }
+
+//   };
+
+// });
+
+
+// $(".fav_test").on("click",function(){
+
+//   for( let iii = 0; iii < localStorage.length; iii++ ){
+//     let iii = 0;
+//     let key = localStorage.key(iii);
+//     let value = localStorage.getItem(key);
+
+//     let html = `
+//       <tr>
+//       <td>${key}</td> 
+//       <td>${value}</td>
+//       <td>画像</td> 
+//       <td>商品名</td>
+//       </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
+
+//     if ( value === "ON" ){ //もしvalueをONに変更したなら取ってきて追加表示
+//       $("#fav_list").append(html); //リストの内容を表示
+
+//     // } else if ( value === "OFF" ){ //もしvalueをOFFに変更したなら削除
+//     //   $("#fav_list").remove(html);
+//       // $("#list").append(html); //残ったリストの内容（ONのみ）を再表示      
+//     }
+
+//   };
+
+// });
+
+
 
 //ONだけソートする
 
 //→この方法がわからなかったため、「全件検索→ONだけソート」ではなく「１件ずつ検索→ONかOFFか条件分岐→ONならリストに表示→これを全件繰り返す」というアプローチに変更
-
-
-
-
 
 
 // //出力した後にクリックされても常に最新にする
