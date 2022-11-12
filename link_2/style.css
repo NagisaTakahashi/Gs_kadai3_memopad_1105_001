@@ -168,46 +168,53 @@ body{
 }
 
 
+
+
+
+
+
+
 /* お気に入り登録済みアイテムの表示 */
 
 .bar2{
   padding-top: 6vh;
 }
 
+/* お気に入りリストの表示 */
+
 .fav_title{
   padding: 3vh 0 0 0;
 }
 
-#list{
+#fav_list{
   width: 90vw;
   font-size: 0.6rem;
 }
 
-#list img{
+#fav_list img{
   width: 20vw;
   padding-bottom: 2vh;
 }
 
-#list td{
+#fav_list td{
   padding-bottom: 3vh;
 }
 
-#li_1{
+#td_1{
   width: 10vw;
 }
 
-#li_2{
+#td_2{
   width: 10vw;
 }
-#li_3{
+
+#td_3{
   width: 30vw;
 }
-#li_4{
+
+#td_4{
   width: 30vw;
 }
-
-
-
 
 
 
