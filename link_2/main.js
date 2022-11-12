@@ -155,10 +155,8 @@ for( let iii = 0; iii < localStorage.length; iii++ ){
   if ( value === "ON" ){ 
   const fav_table = `
   <tr>
-    <td>${key}</td> 
     <td>${value}</td>
-    <td>${object_itemlist[num1].title}</td>
-    <td>${object_itemlist[num1].image}</td>
+    <td><img src="${key}" alt=""></td> 
   </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
   $("#fav_list").append(fav_table);
   }
@@ -181,47 +179,146 @@ $("#fav_1").on("click",function(){
 
   if(flagnum_1 % 2 !== 0 ){ //フラグが奇数ならお気に入りON
     flag_1 == "ON";
-    localStorage.setItem(object_itemlist[num1].title,flag_1);
+    localStorage.setItem(object_itemlist[num1].image,flag_1);
 
-    let key = localStorage.key(object_itemlist[num1].title);
+    let key = localStorage.key(object_itemlist[num1].image);
     let value = localStorage.getItem(key);
 
     const fav_table = `
     <tr>
-      <td>${key}</td> 
-      <td>${value}</td>
       <td>${object_itemlist[num1].title}</td>
-      <td>${object_itemlist[num1].image}</td>
+      <td><img src="${object_itemlist[num1].image}" alt=""></td>
     </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
   
     $("#fav_list").append(fav_table);
 
   } else if ( flagnum_1 % 2 == 0) {//フラグが偶数ならお気に入りOFF
+    //OFFならローカルストレージからキーごと削除
+    localStorage.removeItem(object_itemlist[num1].title,flag_1);
+    //HTML側のテーブルを一回除去（リセット）
+    const fav_table_refresh = ""
+    $("#fav_list").html(fav_table_refresh);
+    
+    // //のこったローカルストレージ内容（ON）を再描写
+
+    for( let iii = 0; iii < localStorage.length; iii++ ){
+      let key = localStorage.key(iii);
+      let value = localStorage.getItem(key);
+
+      
+    
+      if ( value === "ON" ){ 
+      
+      
+      const fav_table = `
+      <tr>
+        <td>${value}</td>
+        <td><img src="${key}" alt=""></td> 
+      </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
+      $("#fav_list").append(fav_table);
+      }
+    };
+
+  }
+});
+
+
+let flag_2 = "ON"; //変数flagにONかOFFかを持たせる（初期設定は全部OFF）
+let flagnum_2 = 0; //フラグに何回押されたかを数えさせる
+
+
+$("#fav_2").on("click",function(){
+  flagnum_2++ ; //ボタンを押すたびにフラグに加算
+
+  console.log();
+  console.log(flagnum_2);
+
+  if(flagnum_2 % 2 !== 0 ){ //フラグが奇数ならお気に入りON
+    flag_2 == "ON";
+    localStorage.setItem(object_itemlist[num2].image,flag_1);
+
+    let key = localStorage.key(object_itemlist[num2].image);
+    let value = localStorage.getItem(key);
+
+    const fav_table = `
+    <tr>
+      <td>${object_itemlist[num2].title}</td>
+      <td><img src="${object_itemlist[num2].image}" alt=""></td>
+    </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
+  
+    $("#fav_list").append(fav_table);
+
+  } else if ( flagnum_2 % 2 == 0) {//フラグが偶数ならお気に入りOFF
   //OFFならローカルストレージからキーごと削除
-  localStorage.removeItem(object_itemlist[num1].title,flag_1);
+  localStorage.removeItem(object_itemlist[num2].title,flag_1);
   //HTML側のテーブルを一回除去（リセット）
   const fav_table_refresh = ""
   $("#fav_list").html(fav_table_refresh);
   // //のこったローカルストレージ内容（ON）を再描写
+    for( let iii = 0; iii < localStorage.length; iii++ ){
+      let key = localStorage.key(iii);
+      let value = localStorage.getItem(key);
 
-  let key = localStorage.key(object_itemlist[num1].title);
-  let value = localStorage.getItem(key);
-
-  const fav_table = `
-  <tr>
-    <td>${key}</td> 
-    <td>${value}</td>
-    <td>${object_itemlist[num1].title}</td>
-    <td>${object_itemlist[num1].image}</td>
-  </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
-
-
-  $("#fav_list").append(fav_table);
-
-
+      if ( value === "ON" ){ 
+      const fav_table = `
+      <tr>
+      <td>${value}</td>
+      <td><img src="${key}" alt=""></td> 
+      </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
+      $("#fav_list").append(fav_table);
+      }
+    };
   }
+});
 
 
+let flag_3 = "ON"; //変数flagにONかOFFかを持たせる（初期設定は全部OFF）
+let flagnum_3 = 0; //フラグに何回押されたかを数えさせる
+
+
+$("#fav_3").on("click",function(){
+  flagnum_3++ ; //ボタンを押すたびにフラグに加算
+
+  console.log();
+  console.log(flagnum_3);
+
+  if(flagnum_3 % 2 !== 0 ){ //フラグが奇数ならお気に入りON
+    flag_3 == "ON";
+    localStorage.setItem(object_itemlist[num3].image,flag_3);
+
+    let key = localStorage.key(object_itemlist[num3].image);
+    let value = localStorage.getItem(key);
+
+    const fav_table = `
+    <tr>
+      <td>${object_itemlist[num3].title}</td>
+      <td><img src="${object_itemlist[num3].image}" alt=""></td>
+    </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
+  
+    $("#fav_list").append(fav_table);
+
+  } else if ( flagnum_3 % 2 == 0) {//フラグが偶数ならお気に入りOFF
+  //OFFならローカルストレージからキーごと削除
+  localStorage.removeItem(object_itemlist[num3].title,flag_1);
+  //HTML側のテーブルを一回除去（リセット）
+  const fav_table_refresh = ""
+  $("#fav_list").html(fav_table_refresh);
+  // //のこったローカルストレージ内容（ON）を再描写
+  // //のこったローカルストレージ内容（ON）を再描写
+  for( let iii = 0; iii < localStorage.length; iii++ ){
+    let key = localStorage.key(iii);
+    let value = localStorage.getItem(key);
+
+    if ( value === "ON" ){ 
+    const fav_table = `
+    <tr>
+        <td>${value}</td>
+        <td><img src="${key}" alt=""></td> 
+    </tr>  `; //値を埋め込んでいる（テンプレートリテラル）
+    $("#fav_list").append(fav_table);
+    }
+  };
+  }
 });
 
 
